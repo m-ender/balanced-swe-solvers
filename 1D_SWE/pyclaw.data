@@ -1,0 +1,62 @@
+LEVEQUE
+STEADY_FLOW
+COSINE
+100
+0
+1
+10
+10
+1.01
+
+Only the first 7 lines of this file are read.
+The first line specifies the solver to be used and
+can be one of the following strings:
+
+    UNBALANCED      Implements the source terms via a
+                    a simple source splitting, and
+                    solves them using Runge-Kutta.
+    LEVEQUE         Uses the balanced solver from
+                    LeVeque (1998), introducing new
+                    discontinuities at the cell centres.
+    ROGERS          Uses the balanced solver from
+                    Rogers (2013), using deviations from
+                    still water as variables.
+    ROGERS_GEO      Uses the balanced solver from
+                    Rogers (2013), using deviations from
+                    geostrophic equilibrium as variables.
+
+The second line specifies the test model to be set up
+and can be one of the following strings:
+
+    STILL_LAKE      Flat surface, no momentum.
+    WAVE            A wave in a single characteristic.
+    ROSSBY          A Rossby adjustment problem.
+    GEOSTROPHIC     A Gaussian hump of water in
+                    geostrophic equilibrium.
+    GEO_WAVE        Superposition of the GEOSTROPHIC and
+                    WAVE models.
+    STEADY_FLOW     Uniform flow at a specified velocity.
+                    A transversal pressure gradient will
+                    be imposed to prevent tilting of the
+                    surface along y.
+
+The third line specifies the bathymetry and can be one
+of the following strings:
+
+    FLAT            Flat bottom, B = 0
+    SLOPE           Linear slope increasing with x
+    GAUSSIAN        B = 0.5*exp(-128*x^2)
+    COSINE          B = 0.5*cos(pi*x*4) for |x| < 0.125
+                        0               otherwise
+    PARABOLIC_HUMP  B = 0.5 - 32*x^2    for |x| < 0.125
+                        0               otherwise
+    PARABOLIC_BOWL  B = 2*x^2
+    CLIFF           B = (tanh(100x)+1)/4
+
+The fourth value is the number cells to use along x.
+The fifth value is the first time T to be plotted.
+The sixth value is the maximum time T of the simulation.
+The seventh is the number of plots to produce.
+The eigth value is the Kelvin number K for the simulation.
+The ninth value is the initial x-velocity of the domain.
+    This value is only used for the STEADY_FLOW model.
